@@ -1,0 +1,10 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: movies
+spec:
+  host: movies
+  subsets:
+  - name: v3
+    labels:
+      version: v3

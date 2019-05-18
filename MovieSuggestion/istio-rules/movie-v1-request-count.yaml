@@ -1,0 +1,47 @@
+apiVersion: config.istio.io/v1alpha2
+kind: instance
+metadata:
+  name: movies-v1-request-count
+  namespace: istio-system
+spec:
+  compiledTemplate: metric
+  params:
+    value: "1" # count each request twice
+    dimensions:
+      reporter: conditional((context.reporter.kind | "inbound") == "outbound", "client", "server")
+      source: source.workload.name  | "unknown"
+      destination: destination.workload.name | "unknown"
+      message: '"movie version counting"'
+    monitored_resource_type: '"UNSPECIFIED"'
+---
+# Configuration for a Prometheus handler
+apiVersion: config.istio.io/v1alpha2
+kind: handler
+metadata:
+  name: movieshandler
+  namespace: istio-system
+spec:
+  compiledAdapter: prometheus
+  params:
+    metrics:
+    - name: movies-v1-version_request # Prometheus metric name
+      instance_name: movies-v1-request-count.instance.istio-system # Mixer instance name (fully-qualified)
+      kind: COUNTER
+      label_names:
+      - reporter
+      - source
+      - destination
+      - message
+
+---
+# Rule to send metric instances to a Prometheus handler
+apiVersion: config.istio.io/v1alpha2
+kind: rule
+metadata:
+  name: movies-v1-rule
+  namespace: istio-system
+spec:
+  match: destination.service.host == "movies.default.svc.cluster.local" && source.workload.name == "moviesuggestion-ui"
+  actions:
+  - handler: movieshandler
+    instances: [ movies-v1-request-count ]
