@@ -11,12 +11,9 @@ spec:
   http:
   - match:
      - uri:
-         regex: "*"
+         prefix: "/"
     rewrite:
        uri: /movie/suggestion
     route:
-    - destination:
-        host: moviesuggestion-ui
-  - route:
     - destination:
         host: moviesuggestion-ui
