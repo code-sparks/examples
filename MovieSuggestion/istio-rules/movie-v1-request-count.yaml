@@ -41,7 +41,7 @@ metadata:
   name: movies-v1-rule
   namespace: istio-system
 spec:
-  match: destination.service.host == "movies.default.svc.cluster.local" && source.workload.name == "moviesuggestion-ui"
+  match: destination.service.host == "movies.default.svc.cluster.local" && source.workload.name == "moviesuggestion-ui" &&  destination.labels["version"] == "v1"
   actions:
   - handler: movieshandler
     instances: [ movies-v1-request-count ]
