@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: movies
+spec:
+  hosts:
+  - movies
+  http:
+  - match:
+    - headers:
+        user:
+          exact: tester    
+    fault:
+      delay:
+        percent: 100
+        fixedDelay: 2.5s
+    route:
+    - destination:
+        host: movies
+        subset: v2
+  - route:
+    - destination:
+        host: movies
+        subset: v1
+

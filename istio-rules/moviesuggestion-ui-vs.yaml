@@ -5,10 +5,10 @@ metadata:
   name: moviesuggestion-ui
 spec:
   hosts:
-  - "*"
+    - "*"
   gateways:
-  - moviesuggestion-gateway
+    - moviesuggestion-gateway
   http:
-  - route:
-    - destination:
-        host: moviesuggestion-ui
+    - route:
+        - destination:
+            host: moviesuggestion-ui

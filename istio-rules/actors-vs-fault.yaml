@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: actors
+spec:
+  hosts:
+  - actors
+  http:
+  - route:
+    - destination:
+        host: actors.default.svc.cluster.local
+    fault:
+      abort:
+        percent: 100
+        httpStatus: 503

@@ -1,0 +1,27 @@
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: moviesuggestion-ui
+spec:
+  hosts:
+    - "*"
+  gateways:
+    - moviesuggestion-gateway
+  http:
+    - match:
+        - uri:
+            regex: "/"
+      rewrite:
+        uri: /movie/suggestion
+      route:
+        - destination:
+            host: moviesuggestion-ui
+      fault:
+        delay:
+          percentage:
+            value: 30
+          fixedDelay: 10s
+    - route:
+        - destination:
+            host: moviesuggestion-ui

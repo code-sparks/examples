@@ -1,0 +1,41 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moviesuggestion-login
+  labels:
+    app: moviesuggestion-login
+    service: moviesuggestion-login
+spec:
+  ports:
+    - port: 8080
+      name: http
+  type: NodePort
+  selector:
+    app: moviesuggestion-login
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moviesuggestion-login
+  labels:
+    app: moviesuggestion-login
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: moviesuggestion-login
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: moviesuggestion-login
+        version: v1
+    spec:
+      containers:
+        - name: moviesuggestion-login
+          image: codesparks/examples-moviesuggestion-login:2.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080

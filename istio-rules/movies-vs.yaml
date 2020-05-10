@@ -9,9 +9,4 @@ spec:
   - route:
     - destination:
         host: movies
-        subset: v1
-      weight: 75
-    - destination:
-        host: movies
         subset: v2
-      weight: 25

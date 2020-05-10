@@ -1,0 +1,16 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: reviews-authz
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: actors
+  rules:
+    - from:
+        - source:
+            principals: ["cluster.local/ns/default/sa/movies"]
+      to:
+        - operation:
+            methods: ["GET"]
