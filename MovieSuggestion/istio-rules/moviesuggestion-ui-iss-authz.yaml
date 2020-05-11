@@ -1,0 +1,16 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: moviesuggestion-ui-authz
+  namespace: default
+spec:  
+  selector:
+    matchLabels:
+      app: moviesuggestion-ui
+  rules:
+  - to:
+    - operation:
+        methods: ["GET"]
+    when:
+    - key: request.auth.claims[iss]
+      values: ["testing@codesparks.com"]
