@@ -1,7 +1,7 @@
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: reviews-authz
+  name: actors-authz
   namespace: default
 spec:
   selector:
