@@ -1,11 +1,3 @@
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: moviesuggestion-login
-  labels:
-    app: moviesuggestion-login
-    service: moviesuggestion-login
 spec:
   ports:
     - port: 8080
@@ -35,7 +27,7 @@ spec:
     spec:
       containers:
         - name: moviesuggestion-login
-          image: codesparks/examples-moviesuggestion-login:2.0
-          imagePullPolicy: IfNotPresent
+          image: codesparks/examples-moviesuggestion-login:2.2
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
