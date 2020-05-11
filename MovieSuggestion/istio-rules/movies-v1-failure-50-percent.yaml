@@ -8,8 +8,13 @@ spec:
   http:
     - route:
         - destination:
-            host: reviews
+            host: movies
             subset: v1
+          weight: 50 
+        - destination:
+            host: movies
+            subset: v2
+          weight: 50            
       fault:
         abort:
           percentage:
