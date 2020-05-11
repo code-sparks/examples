@@ -1,3 +1,11 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moviesuggestion-login
+  labels:
+    app: moviesuggestion-login
+    service: moviesuggestion-login
 spec:
   ports:
     - port: 8080
