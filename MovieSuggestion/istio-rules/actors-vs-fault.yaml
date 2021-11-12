@@ -11,5 +11,6 @@ spec:
         host: actors.default.svc.cluster.local
     fault:
       abort:
-        percent: 100
+        percentage:
+           value: 100
         httpStatus: 503
