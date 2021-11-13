@@ -1,14 +1,26 @@
-apiVersion: authentication.istio.io/v1alpha1
-kind: Policy
+apiVersion: security.istio.io/v1beta1
+kind: RequestAuthentication
 metadata:
   name: moviesuggestion-ui-policy
+  namespace: default
 spec:
-  targets:
-    - name: moviesuggestion-ui
-  peers:
-    - mtls: {}
-  origins:
-    - jwt:
-        issuer: "testing@codesparks.com"
-        jwksUri: "https://raw.githubusercontent.com/code-sparks/examples/master/MovieSuggestion/jwks.json"
-  principalBinding: USE_ORIGIN
+  selector:
+    matchLabels:
+      app: moviesuggestion-ui
+  jwtRules:
+  - issuer: "testing@codesparks.com"
+    jwksUri: "https://raw.githubusercontent.com/code-sparks/examples/master/MovieSuggestion/jwks.json"
+---
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: moviesuggestion-ui
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: moviesuggestion-ui
+  rules:
+  - from:
+    - source:
+        requestPrincipals: ["*"]
