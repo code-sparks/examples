@@ -45,8 +45,7 @@ Using Istio `ServiceEntry` configurations, you can access any publicly accessibl
 To demonstrate the controlled way of enabling access to external services, you need to change the `global.outboundTrafficPolicy.mode` option from the `ALLOW_ANY` mode to the `REGISTRY_ONLY` mode.
 
 ```
-kubectl get configmap istio -n istio-system -o yaml | sed 's/mode: ALLOW_ANY/mode: REGISTRY_ONLY/g' | kubectl replace -n istio-system -f -
-configmap "istio" replaced
+istioctl install --set profile=demo -y --set meshConfig.outboundTrafficPolicy.mode=REGISTRY_ONLY
 ```
 
 Make few calls to see if we can send out requests
