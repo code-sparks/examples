@@ -10,7 +10,7 @@
 Deploy the sleep app to use as a test source for sending requests, it is located at your istio install folder
 
 ```
-$ kubectl apply -f samples/sleep/sleep.yaml
+$ kubectl apply -f sleep.yaml
 ```
 
 Set the `SOURCE_POD` environment variable to the name of your source pod:
