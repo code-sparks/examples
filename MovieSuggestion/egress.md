@@ -21,7 +21,7 @@ $ export SOURCE_POD=$(kubectl get pod -l app=sleep -o jsonpath={.items..metadata
 
 ## 1. Envoy passthrough to external services
 
-setup istio to allow access to external services, if istio  global.outboundTrafficPolicy.mode option set to `ALLOW_ANY`, the Istio proxy lets calls to unknown services pass through, so lets start by checking that this option is set first
+setup istio to allow access to external services, if istio  global.outboundTrafficPolicy.mode option set to `ALLOW_ANY`, the Istio proxy lets calls to unknown services pass through, so lets start by checking that this option is set first (You should either see ALLOW_ANY or no output (default ALLOW_ANY).)
 
 ```
 $ kubectl get istiooperator installed-state -n istio-system -o jsonpath='{.spec.meshConfig.outboundTrafficPolicy.mode}'
