@@ -4,7 +4,7 @@ metadata:
   name: moviesuggestion-ui-v2
 spec:
   hosts:
-    - www.devopstower.com
+    - www.istiomesh.com
   gateways:
     - moviesuggestion-gateway
   http:
@@ -19,7 +19,7 @@ metadata:
   name: moviesuggestion-ui
 spec:
   hosts:
-    - test.devopstower.com
+    - test.istiomesh.com
   gateways:
     - moviesuggestion-gateway
   http:
